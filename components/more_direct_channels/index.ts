@@ -26,6 +26,7 @@ import {getCurrentTeam} from 'mattermost-redux/selectors/entities/teams';
 import {ActionFunc, GenericAction} from 'mattermost-redux/types/actions';
 import {Channel} from 'mattermost-redux/types/channels';
 import {UserProfile} from 'mattermost-redux/types/users';
+import {Dictionary} from 'mattermost-redux/types/utilities';
 import {sortByUsername, filterProfilesStartingWithTerm} from 'mattermost-redux/utils/user_utils';
 import {memoizeResult} from 'mattermost-redux/utils/helpers';
 
@@ -99,7 +100,7 @@ const filterGroupChannels = memoizeResult((channels: Array<{profiles: UserProfil
     });
 });
 
-const filterDirectChannels = memoizeResult((channels: Channel[], userId: string) => {
+const filterDirectChannels = memoizeResult((channels: Dictionary<Channel>, userId: string) => {
     return Object.values(channels).filter((channel) => {
         if (channel.type !== 'D') {
             return false;
